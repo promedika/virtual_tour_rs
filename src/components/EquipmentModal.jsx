@@ -54,7 +54,9 @@ export default function EquipmentModal({ item, onClose }) {
       className={cn(
         // m-auto menaruh dialog tepat di tengah layar; tinggi dibatasi 85vh dan
         // isi digulir di dalamnya agar modal tidak pernah terpotong tepi layar.
-        'm-auto flex max-h-[85vh] w-[min(44rem,92vw)] flex-col overflow-hidden rounded-xl bg-white p-0 text-slate-800 shadow-2xl',
+        // dvh, bukan vh: di Safari iOS satuan vh mengabaikan bilah peramban
+        // sehingga modal 85vh masih terpotong tepi bawah layar.
+        'm-auto flex max-h-[85dvh] w-[min(44rem,92vw)] flex-col overflow-hidden rounded-xl bg-white p-0 text-slate-800 shadow-2xl',
         'backdrop:bg-slate-950/70 open:animate-[munculModal_180ms_ease-out]'
       )}
     >
@@ -77,9 +79,14 @@ export default function EquipmentModal({ item, onClose }) {
         </button>
       </div>
 
-      <div className="min-h-0 flex-1 overflow-y-auto">
+      {/* flex-auto (basis auto), bukan flex-1 (basis 0): pada <dialog> yang
+          tingginya fit-content, Safari/iOS menciutkan anak berbasis 0 menjadi
+          nol sehingga hanya kepala modal yang tampak di ponsel.
+          overscroll-contain menahan gulir agar tidak merembet ke panorama. */}
+      <div className="min-h-0 flex-auto overflow-y-auto overscroll-contain">
         <figure className="m-0">
-          <div className="relative aspect-[4/3] w-full bg-slate-100 sm:aspect-[16/7]">
+          {/* 16/9 di ponsel: 4/3 memakan ~70vw tinggi dan mendesak tab keluar layar. */}
+          <div className="relative aspect-[16/9] w-full bg-slate-100 sm:aspect-[16/7]">
             <Image
               src={item.equipmentImage}
               alt={`Foto ${item.AlatNama}`}
@@ -94,7 +101,13 @@ export default function EquipmentModal({ item, onClose }) {
           </figcaption>
         </figure>
 
-        <div role="tablist" aria-label="Bagian rincian alat" className="flex gap-1 border-b border-slate-200 px-3 pt-3">
+        {/* Tiga tab tidak muat sebaris di layar sempit, jadi barisnya digulir
+            mendatar alih-alih membungkus dan menggeser isi ke bawah. */}
+        <div
+          role="tablist"
+          aria-label="Bagian rincian alat"
+          className="sticky top-0 z-10 flex gap-1 overflow-x-auto border-b border-slate-200 bg-white px-3 pt-3"
+        >
           {TABS.map((t) => (
             <button
               key={t.id}
@@ -105,7 +118,7 @@ export default function EquipmentModal({ item, onClose }) {
               aria-controls={`panel-${t.id}`}
               onClick={() => setTab(t.id)}
               className={cn(
-                'rounded-t-md px-3 py-2 text-xs font-semibold transition sm:text-sm',
+                'shrink-0 whitespace-nowrap rounded-t-md px-3 py-2 text-xs font-semibold transition sm:text-sm',
                 tab === t.id
                   ? 'border-b-2 border-[#E2762B] text-[#13263D]'
                   : 'border-b-2 border-transparent text-slate-500 hover:text-slate-800'
