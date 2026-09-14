@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Building2, CircleCheck, ExternalLink, MapPin, Stethoscope } from 'lucide-react';
+import { ArrowRight, Building2, CircleCheck, MapPin, Stethoscope } from 'lucide-react';
 import { daftarRumahSakit, getRumahSakit } from '@/src/data/hospitalData';
 
 export const metadata = {
@@ -46,19 +46,7 @@ export default function DasborPage() {
               className="h-9 w-auto object-contain sm:h-10"
             />
           </span>
-          <div className="flex min-w-0 items-center gap-3">
-            <p className="hidden text-xs text-slate-400 sm:block">Tur Virtual 360° &amp; Data Kalibrasi</p>
-            {/* Tautan ke situs SIMGPS. Membuka tab baru agar dasbor tetap terbuka. */}
-            <a
-              href="https://simgps-website.vercel.app/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex shrink-0 items-center gap-1.5 rounded-md bg-white/10 px-2.5 py-2 text-xs font-bold text-white ring-1 ring-white/15 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B] sm:text-sm"
-            >
-              <ExternalLink className="size-4 shrink-0" aria-hidden="true" />
-              SIMGPS
-            </a>
-          </div>
+          <p className="hidden text-xs text-slate-400 sm:block">Tur Virtual 360° &amp; Data Kalibrasi</p>
         </div>
       </header>
 

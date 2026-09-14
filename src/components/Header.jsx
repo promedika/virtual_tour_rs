@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Building2, Check, ChevronDown, ChevronRight, ExternalLink, LayoutDashboard, Menu } from 'lucide-react';
+import { Building2, Check, ChevronDown, ChevronRight, LayoutDashboard, Menu } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { daftarRumahSakit } from '@/src/data/hospitalData';
 import { cn } from '@/src/lib/cn';
@@ -172,18 +172,6 @@ export default function Header({ rsAktif, trail, onOpenDrawer, onGantiRumahSakit
         <LayoutDashboard className="size-4 shrink-0" aria-hidden="true" />
         <span className="hidden sm:inline">Kembali ke Dashboard</span>
       </Link>
-
-      {/* Tautan ke situs SIMGPS. Membuka tab baru agar tur tidak terputus. */}
-      <a
-        href="https://simgps-website.vercel.app/"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Buka situs SIMGPS di tab baru"
-        className="flex shrink-0 items-center gap-1.5 rounded-md bg-white/10 p-2 text-xs font-bold text-white ring-1 ring-white/15 transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B] sm:px-2.5 sm:text-sm"
-      >
-        <ExternalLink className="size-4 shrink-0" aria-hidden="true" />
-        <span className="hidden lg:inline">SIMGPS</span>
-      </a>
     </header>
   );
 }
