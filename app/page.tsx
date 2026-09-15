@@ -4,7 +4,7 @@ import { ArrowRight, Building2, CircleCheck, MapPin, Stethoscope } from 'lucide-
 import { daftarRumahSakit, getRumahSakit } from '@/src/data/hospitalData';
 
 export const metadata = {
-  title: 'Dasbor Tur Virtual 360° · PT. Global Promedika Services',
+  title: 'Dasbor · GridScan Smart Asset Tracking',
   description:
     'Pilih rumah sakit untuk menelusuri gedung, lantai, ruangan, dan data kalibrasi alat medis dalam tampilan 360°.',
 };
@@ -32,21 +32,21 @@ export default function DasborPage() {
   const daftar = daftarRumahSakit.map((rs) => ringkasan(rs.id));
 
   return (
-    <main className="min-h-dvh bg-[#0F1F33] text-white">
+    <main className="min-h-dvh bg-[#0E2A47] text-white">
       <header className="border-b border-white/10 px-4 py-4 sm:px-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-3">
           {/* Alas putih menjaga logo tetap tajam di atas latar gelap. */}
           <span className="flex shrink-0 items-center rounded-md bg-white px-2 py-1 shadow-sm">
             <Image
-              src="/logo-gps.png"
-              alt="PT. Global Promedika Services"
-              width={578}
-              height={400}
+              src="/logo-gridscan.png"
+              alt="GridScan Smart Asset Tracking"
+              width={946}
+              height={234}
               priority
-              className="h-9 w-auto object-contain sm:h-10"
+              className="h-8 w-auto object-contain sm:h-9"
             />
           </span>
-          <p className="hidden text-xs text-slate-400 sm:block">Tur Virtual 360° &amp; Data Kalibrasi</p>
+          <p className="hidden text-xs text-slate-400 sm:block">Smart Asset Tracking</p>
         </div>
       </header>
 
@@ -55,7 +55,7 @@ export default function DasborPage() {
           <Building2 className="size-3.5" aria-hidden="true" />
           {daftar.length} rumah sakit terdaftar
         </p>
-        <h1 className="text-3xl font-bold leading-tight sm:text-4xl">Dasbor Tur Virtual Rumah Sakit</h1>
+        <h1 className="text-[clamp(1.5rem,5vw,2.25rem)] font-bold leading-tight">GridScan Smart Asset Tracking</h1>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300 sm:text-base">
           Pilih rumah sakit untuk menelusuri gedung, lantai, dan ruangan dalam tampilan 360°. Setiap alat medis
           dilengkapi riwayat kalibrasi dan pemeliharaan sesuai lembar kerja teknisi.
@@ -66,7 +66,7 @@ export default function DasborPage() {
             <li key={rs.profil.id}>
               <Link
                 href={`/tur/${rs.profil.id}/${rs.profil.sceneAwal}`}
-                className="group flex h-full flex-col rounded-xl bg-[#13263D] p-5 ring-1 ring-white/10 transition hover:ring-[#E2762B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B]"
+                className="group flex h-full flex-col rounded-xl bg-[#0E2A47] p-5 ring-1 ring-white/10 transition hover:ring-[#E2762B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B]"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">

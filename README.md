@@ -1,7 +1,7 @@
-# Tur Virtual 360° Rumah Sakit
+# GridScan Smart Asset Tracking
 
-Tur virtual berjenjang: **halaman depan → lantai → ruangan → alat medis**.
-Dibangun untuk PT. Global Promedika Services.
+Penelusuran aset rumah sakit berjenjang: **halaman depan → lantai → ruangan →
+alat medis**, dengan panorama 360° dan satu papan informasi per area.
 
 ## Teknologi
 
@@ -32,10 +32,10 @@ app/
   api/foto/[slug]/         foto alat contoh (SVG)
 src/
   components/
-    Header.jsx             logo gps + breadcrumb
-    Viewer360.jsx          bola panorama, OrbitControls, penanda 3D
-    Sidebar.jsx            navigasi kontekstual per level
-    FloorplanMap.jsx       denah 2D yang bisa dilipat
+    Header.jsx             logo GridScan + breadcrumb
+    Viewer360.jsx          bola panorama, OrbitControls, papan informasi
+    NavDrawer.jsx          navigasi pohon Gedung → Lantai → Ruangan → Alat
+    Minimap.jsx            denah 2D yang bisa dilipat
     EquipmentModal.jsx     detail alat (dialog native)
     TourShell.jsx          perekat: viewer + sidebar + denah + modal
   data/hospitalData.js     scene, alat, denah

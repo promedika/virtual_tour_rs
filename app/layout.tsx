@@ -2,19 +2,12 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Tur Virtual 360° Rumah Sakit | PT. Global Promedika Services',
+  title: 'GridScan Smart Asset Tracking',
   description:
-    'Jelajahi gedung, lantai, dan ruangan rumah sakit dalam tampilan 360°, lengkap dengan data alat medis dan riwayat kalibrasi.',
-  applicationName: 'PT. Global Promedika Services',
-  // Logo perusahaan dipakai untuk tab peramban, pintasan layar utama, dan penanda.
-  icons: {
-    icon: [
-      { url: '/favicon.ico', sizes: '256x256' },
-      { url: '/logo-gps.png', type: 'image/png' },
-    ],
-    shortcut: '/favicon.ico',
-    apple: '/logo-gps.png',
-  },
+    'Penelusuran aset rumah sakit dalam tampilan 360°, lengkap dengan data alat medis dan riwayat kalibrasi.',
+  applicationName: 'GridScan Smart Asset Tracking',
+  // Ikon tab peramban dan pintasan layar utama diambil otomatis dari
+  // app/icon.png serta app/apple-icon.png, jadi tidak perlu didaftarkan di sini.
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {

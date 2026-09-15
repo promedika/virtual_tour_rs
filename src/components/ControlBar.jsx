@@ -45,7 +45,7 @@ export default function ControlBar({ onReset, onToggleMap, mapOpen, onToggleSumm
   };
 
   return (
-    <div className="pointer-events-auto flex items-center gap-1 rounded-full bg-[#13263D]/95 px-2 py-1.5 shadow-xl ring-1 ring-white/10">
+    <div className="pointer-events-auto flex items-center gap-1 rounded-full bg-[#0E2A47]/95 px-2 py-1.5 shadow-xl ring-1 ring-white/10">
       <Aksi
         icon={fullscreen ? Minimize : Maximize}
         label={fullscreen ? 'Keluar dari layar penuh' : 'Layar penuh'}
@@ -53,7 +53,12 @@ export default function ControlBar({ onReset, onToggleMap, mapOpen, onToggleSumm
       />
       <Aksi icon={RotateCcw} label="Atur ulang arah pandang" onClick={onReset} />
       <Aksi icon={MapIcon} label="Tampilkan atau sembunyikan denah" onClick={onToggleMap} active={mapOpen} />
-      <Aksi icon={Info} label="Tampilkan atau sembunyikan ringkasan" onClick={onToggleSummary} active={summaryOpen} />
+      <Aksi
+        icon={Info}
+        label="Tampilkan atau sembunyikan papan informasi"
+        onClick={onToggleSummary}
+        active={summaryOpen}
+      />
     </div>
   );
 }

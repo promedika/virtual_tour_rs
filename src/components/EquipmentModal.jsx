@@ -60,7 +60,7 @@ export default function EquipmentModal({ item, onClose }) {
         'backdrop:bg-slate-950/70 open:animate-[munculModal_180ms_ease-out]'
       )}
     >
-      <div className="flex shrink-0 items-start justify-between gap-3 bg-[#13263D] px-5 py-4 text-white">
+      <div className="flex shrink-0 items-start justify-between gap-3 bg-[#0E2A47] px-5 py-4 text-white">
         <div className="min-w-0">
           <h2 id="judul-alat" className="truncate text-lg font-bold">
             {item.AlatNama}
@@ -120,7 +120,7 @@ export default function EquipmentModal({ item, onClose }) {
               className={cn(
                 'shrink-0 whitespace-nowrap rounded-t-md px-3 py-2 text-xs font-semibold transition sm:text-sm',
                 tab === t.id
-                  ? 'border-b-2 border-[#E2762B] text-[#13263D]'
+                  ? 'border-b-2 border-[#E2762B] text-[#0E2A47]'
                   : 'border-b-2 border-transparent text-slate-500 hover:text-slate-800'
               )}
             >
@@ -187,7 +187,7 @@ function PanelKalibrasi({ rows }) {
           {rows.map((r) => (
             <li key={r.date} className="rounded-lg border border-slate-200 p-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-sm font-semibold text-[#13263D]">{tanggal(r.date)}</p>
+                <p className="text-sm font-semibold text-[#0E2A47]">{tanggal(r.date)}</p>
                 <span className="rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-800">
                   {r.result}
                 </span>
@@ -214,7 +214,7 @@ function PanelPerawatan({ rows }) {
           {rows.map((r) => (
             <li key={r.date} className="relative">
               <span className="absolute -left-[1.4rem] top-1.5 size-2.5 rounded-full bg-[#E2762B]" aria-hidden="true" />
-              <p className="text-sm font-semibold text-[#13263D]">{tanggal(r.date)}</p>
+              <p className="text-sm font-semibold text-[#0E2A47]">{tanggal(r.date)}</p>
               <p className="text-sm text-slate-600">{r.action}</p>
               <p className="text-xs text-slate-500">{r.by}</p>
             </li>

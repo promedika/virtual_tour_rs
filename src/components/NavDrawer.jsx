@@ -40,7 +40,7 @@ export default function NavDrawer({ tree, activeId, activeTrail, open, onClose, 
         aria-label="Navigasi area rumah sakit"
         className={cn(
           // z-40: di bawah bilah atas (z-50) agar daftar rumah sakit tidak terpotong.
-          'z-40 flex w-72 shrink-0 flex-col bg-[#13263D] text-slate-200',
+          'z-40 flex w-72 shrink-0 flex-col bg-[#0E2A47] text-slate-200',
           'fixed inset-y-0 left-0 transition-transform duration-200 md:static md:translate-x-0',
           open ? 'translate-x-0' : '-translate-x-full'
         )}

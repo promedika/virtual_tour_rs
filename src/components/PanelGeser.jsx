@@ -64,7 +64,7 @@ export default function PanelGeser({ className, gagangKelas, gagang = true, labe
         title={`${label} — klik ganda untuk mengembalikan`}
         className={cn(
           'pointer-events-auto absolute -top-2 right-2 grid h-5 w-9 touch-none cursor-grab place-items-center',
-          'rounded-full bg-[#1E3A5F] text-slate-300 shadow ring-1 ring-white/20 active:cursor-grabbing',
+          'rounded-full bg-[#2B6CB0] text-slate-300 shadow ring-1 ring-white/20 active:cursor-grabbing',
           'hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B]',
           gagangKelas
         )}

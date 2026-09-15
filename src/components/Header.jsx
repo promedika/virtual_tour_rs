@@ -51,7 +51,7 @@ function PemilihRumahSakit({ aktif, onPilih }) {
         <ul
           role="listbox"
           aria-label="Pilih rumah sakit"
-          className="absolute left-0 top-full z-50 mt-1 w-[min(20rem,calc(100vw-1.5rem))] overflow-hidden rounded-lg bg-[#13263D] py-1 shadow-2xl ring-1 ring-white/15"
+          className="absolute left-0 top-full z-50 mt-1 w-[min(20rem,calc(100vw-1.5rem))] overflow-hidden rounded-lg bg-[#0E2A47] py-1 shadow-2xl ring-1 ring-white/15"
         >
           {daftarRumahSakit.map((rs) => {
             const terpilih = rs.id === aktif.id;
@@ -93,7 +93,7 @@ export default function Header({ rsAktif, trail, onOpenDrawer, onGantiRumahSakit
   return (
     // z-50 menempatkan bilah ini di atas panel kiri, sehingga daftar pilihan
     // rumah sakit terbuka utuh dan tidak terpotong oleh panel navigasi.
-    <header className="relative z-50 flex h-16 shrink-0 items-center gap-1.5 bg-[#13263D] px-1.5 text-white ring-1 ring-white/10 sm:gap-3 sm:px-4">
+    <header className="relative z-50 flex h-16 shrink-0 items-center gap-1.5 bg-[#0E2A47] px-1.5 text-white ring-1 ring-white/10 sm:gap-3 sm:px-4">
       <button
         type="button"
         onClick={onOpenDrawer}
@@ -107,22 +107,22 @@ export default function Header({ rsAktif, trail, onOpenDrawer, onGantiRumahSakit
           di atas bilah gelap maupun latar terang. */}
       <Link
         href="/"
-        aria-label="Beranda PT. Global Promedika Services"
+        aria-label="Beranda GridScan Smart Asset Tracking"
         className="flex shrink-0 items-center rounded-md bg-white px-1.5 py-1 shadow-sm ring-1 ring-white/20 transition hover:ring-[#E2762B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B] sm:px-2"
       >
         <Image
-          src="/logo-gps.png"
-          alt="PT. Global Promedika Services"
-          width={578}
-          height={400}
+          src="/logo-gridscan.png"
+          alt="GridScan Smart Asset Tracking"
+          width={946}
+          height={234}
           priority
-          className="h-7 w-auto object-contain sm:h-10"
+          className="h-6 w-auto object-contain sm:h-8"
         />
       </Link>
 
       {/* Judul aplikasi, tepat di tengah bilah. */}
       <p className="pointer-events-none absolute left-1/2 hidden -translate-x-1/2 whitespace-nowrap text-sm font-bold uppercase tracking-[0.22em] text-white lg:block">
-        Rumah Sakit Virtual Tour
+        Smart Asset Tracking
       </p>
 
       <PemilihRumahSakit aktif={rsAktif} onPilih={onGantiRumahSakit} />

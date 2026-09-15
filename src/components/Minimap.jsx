@@ -15,7 +15,7 @@ export default function Minimap({ plan, activeId, open, onToggle, onNavigate }) 
       <button
         type="button"
         onClick={onToggle}
-        className="pointer-events-auto flex items-center gap-2 rounded-lg bg-[#13263D]/95 px-3 py-2 text-xs font-bold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/10 hover:bg-[#1E3A5F] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B]"
+        className="pointer-events-auto flex items-center gap-2 rounded-lg bg-[#0E2A47]/95 px-3 py-2 text-xs font-bold uppercase tracking-wide text-white shadow-lg ring-1 ring-white/10 hover:bg-[#2B6CB0] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E2762B]"
       >
         <MapIcon className="size-4 text-[#E2762B]" aria-hidden="true" />
         Denah
@@ -26,7 +26,7 @@ export default function Minimap({ plan, activeId, open, onToggle, onNavigate }) 
   return (
     <section
       aria-label="Denah lantai aktif"
-      className="pointer-events-auto w-56 overflow-hidden rounded-lg bg-[#13263D]/95 shadow-xl ring-1 ring-white/10 sm:w-64"
+      className="pointer-events-auto w-56 overflow-hidden rounded-lg bg-[#0E2A47]/95 shadow-xl ring-1 ring-white/10 sm:w-64"
     >
       <header className="flex items-center justify-between gap-2 border-b border-white/10 px-3 py-2">
         <h2 className="flex min-w-0 items-center gap-1.5 text-[0.65rem] font-bold uppercase tracking-widest text-white">
@@ -44,7 +44,7 @@ export default function Minimap({ plan, activeId, open, onToggle, onNavigate }) 
       </header>
 
       <div className="px-3 pb-1 pt-2">
-        <div className="relative aspect-[4/3] w-full rounded border border-white/10 bg-[#0F1F33]">
+        <div className="relative aspect-[4/3] w-full rounded border border-white/10 bg-[#0E2A47]">
           {plan.rooms.map((r) => {
             const aktif = r.id === activeId;
             return (

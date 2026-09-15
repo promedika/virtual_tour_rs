@@ -14,16 +14,16 @@ import { cn } from '@/src/lib/cn';
 import ControlBar from './ControlBar';
 import EquipmentModal from './EquipmentModal';
 import Header from './Header';
+import InfoBoard from './InfoBoard';
 import Minimap from './Minimap';
 import NavDrawer from './NavDrawer';
 import PanelGeser from './PanelGeser';
-import SummaryPanel from './SummaryPanel';
 
 // Penampil memuat WebGL, jadi hanya dirender di peramban.
 const Viewer360 = dynamic(() => import('./Viewer360'), {
   ssr: false,
   loading: () => (
-    <div className="grid h-full place-items-center bg-[#0F1F33]">
+    <div className="grid h-full place-items-center bg-[#0E2A47]">
       <p className="text-sm text-slate-300">Menyiapkan penampil 360°…</p>
     </div>
   ),
@@ -35,8 +35,8 @@ export default function TourShell({ rsId, sceneId }) {
   const [selected, setSelected] = useState(null); // nomor acuan alat yang dibuka
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [mapOpen, setMapOpen] = useState(false);
-  // Ringkasan selalu mulai tertutup; dibuka lewat tombol info pada bilah bawah.
-  const [summaryOpen, setSummaryOpen] = useState(false);
+  // Papan informasi adalah jalur utama menelusuri area, jadi tampil sejak awal.
+  const [summaryOpen, setSummaryOpen] = useState(true);
   const [resetSignal, setResetSignal] = useState(0);
 
   // Denah terbuka sendiri hanya pada layar lebar; di ponsel ruang tidak cukup.
@@ -45,12 +45,13 @@ export default function TourShell({ rsId, sceneId }) {
   // eslint-disable-next-line react-hooks/set-state-in-effect -- pengukuran viewport sekali jalan
   useEffect(() => setMapOpen(window.innerWidth >= 1024), []);
 
-  // Berpindah ruangan menutup kembali ringkasan agar pandangan tidak terhalang.
-  // Rute /tur/[rs]/[scene] memakai komponen yang sama, jadi state tidak ikut hilang.
+  // Berpindah area selalu memunculkan kembali papan informasi, sehingga isi
+  // ruangan baru langsung terbaca. Rute /tur/[rs]/[scene] memakai komponen yang
+  // sama, jadi state tidak ikut hilang saat berpindah.
   const [sceneTerakhir, setSceneTerakhir] = useState(sceneId);
   if (sceneTerakhir !== sceneId) {
     setSceneTerakhir(sceneId);
-    setSummaryOpen(false);
+    setSummaryOpen(true);
   }
 
   // Seluruh tampilan dibaca ulang dari data setiap rsId atau sceneId berubah,
@@ -62,6 +63,9 @@ export default function TourShell({ rsId, sceneId }) {
   const plan = useMemo(() => getFloorplanFor(rsId, sceneId), [rsId, sceneId]);
   const tree = useMemo(() => getNavTree(rsId), [rsId]);
   const alatDiRuangan = useMemo(() => getEquipmentIn(rsId, sceneId), [rsId, sceneId]);
+  // Tujuan perpindahan diambil dari hotspot bertipe nav; papan informasi
+  // menampilkannya sebagai daftar sehingga tidak ada penanda yang tersebar.
+  const tujuan = useMemo(() => scene.hotspots.filter((h) => h.type === 'nav'), [scene]);
 
   const navigate = useCallback(
     (id) => {
@@ -83,7 +87,7 @@ export default function TourShell({ rsId, sceneId }) {
   );
 
   return (
-    <div className="flex h-[100dvh] flex-col overflow-hidden bg-[#0F1F33]">
+    <div className="flex h-[100dvh] flex-col overflow-hidden bg-[#0E2A47]">
       <Header
         rsAktif={rs.profil}
         trail={trail}
@@ -103,38 +107,26 @@ export default function TourShell({ rsId, sceneId }) {
           onSelect={setSelected}
         />
 
-        <main className="relative min-w-0 flex-1 bg-[#0F1F33]">
+        <main className="relative min-w-0 flex-1 bg-[#0E2A47]">
           <Viewer360
             key={`${rsId}-${scene.id}`} /* bangun ulang penampil saat pindah area */
             scene={scene}
-            equipment={rs.equipment}
-            onSelect={setSelected}
-            onNavigate={navigate}
             resetSignal={resetSignal}
           />
 
-          {/* Nama ruangan; tidak menghalangi interaksi penampil. */}
-          <div className="pointer-events-none absolute left-3 top-3 max-w-[55%] rounded-lg bg-[#13263D]/85 px-3 py-2 ring-1 ring-white/10">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-widest text-[#E2762B]">
-              {scene.building ?? 'Area'}
-            </p>
-            <h1 className="truncate text-sm font-bold text-white sm:text-base">{scene.name}</h1>
-          </div>
-
-          {/* Ringkasan: lembar atas di ponsel dan tablet — di bawah papan nama
-              ruangan, jauh dari bilah kendali — dan kartu kanan atas mulai
-              layar lebar. Dapat digeser bila menutupi pandangan. */}
+          {/* Papan informasi berada di atas kanvas, bukan di dalamnya, sehingga
+              memutar panorama tidak pernah menyembunyikannya. Letaknya dapat
+              dipindahkan pengguna lewat gagang, sama seperti denah. */}
           {summaryOpen && (
-            <PanelGeser
-              className="absolute inset-x-3 top-[4.75rem] flex justify-end lg:inset-x-auto lg:right-3 lg:top-3 lg:w-[19rem]"
-              label="Geser panel ringkasan"
-            >
-              <SummaryPanel
+            <PanelGeser className="absolute right-3 top-3 flex justify-end" label="Geser papan informasi">
+              <InfoBoard
                 scene={scene}
                 equipment={alatDiRuangan}
+                tujuan={tujuan}
                 open={summaryOpen}
                 onToggle={() => setSummaryOpen((v) => !v)}
                 onSelect={setSelected}
+                onNavigate={navigate}
               />
             </PanelGeser>
           )}
@@ -145,9 +137,9 @@ export default function TourShell({ rsId, sceneId }) {
             <PanelGeser
               className={cn(
                 'absolute bottom-20 right-3 transition-opacity duration-300 lg:bottom-3',
-                /* Di bawah 1024px ringkasan memakai hampir seluruh tinggi layar,
-                   jadi denah disembunyikan agar keduanya tidak pernah bertindih. */
-                summaryOpen && 'invisible opacity-0 lg:visible lg:opacity-100'
+                /* Di layar sempit papan informasi memakai sebagian besar tinggi
+                   layar, jadi denah disembunyikan agar keduanya tidak bertindih. */
+                summaryOpen && mapOpen && 'invisible opacity-0 lg:visible lg:opacity-100'
               )}
               label="Geser denah"
               gagang={mapOpen}
